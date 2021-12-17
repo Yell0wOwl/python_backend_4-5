@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from logger.local_settings import user, password, secret_key
+from application.local_settings import user, password, secret_key
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Отсюда
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '437591978040070'
+SOCIAL_AUTH_FACEBOOK_SECRET = '20785f947105c156dcdd2b94415b8f08'
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+#Досюда
 
 # Application definition
 
@@ -39,8 +53,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'logger',
-    'logs',
-    'message',
+    'users',
+    'rest_framework',
+    'social_django',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +128,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+AUTH_USER_MODEL = 'users.User'
 
 LANGUAGE_CODE = 'en-us'
 
